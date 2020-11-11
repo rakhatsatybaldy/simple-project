@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="/layout/main.html">
+        <div layout:fragment="main_content">
+        <div class="row mt-5">
+            <div class="col-6 offset-3">
+            <form th:action="@{'/addgood'}" method="post">
+                <div class="form-group">
+                    <label th:text="#{label.name}"></label>
+                    <input type="text" class="form-control" name="name">
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.description}"></label>
+                    <textarea  class="form-control" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.price}"></label>
+                    <input type="number" class="form-control" name="price">
+                </div>
+                <div class="form-group">
+                    <label th:text="#{label.amount}"></label>
+                    <input type="number" class="form-control" name="amount">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success" th:text="#{label.add}"></button>
+                </div>
+            </form>
+            </div>
+        </div>
+
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th th:text="#{label.name}"></th>
+                            <th th:text="#{label.price}"></th>
+                            <th th:text="#{label.amount}"></th>
+                            <th th:text="#{label.details}"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="g :${goods}">
+                        <td th:text="${g.id}"></td>
+                        <td th:text="${g.name}"></td>
+                        <td th:text="${g.price} + ' KZT'"></td>
+                        <td th:text="${g.amount}"></td>
+                        <td>
+                            <a th:href="@{'/details/' + ${g.id}}" class="btn btn-primary btn-sm" th:text="#{label.details}"></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+</html>
